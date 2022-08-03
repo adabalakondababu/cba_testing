@@ -1,60 +1,44 @@
 package com.automation.ui;
 
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.Assert;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.Test;
 
-import automation.ui.BrowserSetUp;
-import automation.ui.GameChallenge;
-import automation.ui.LoginFlow;
-import automation.ui.UserRegistration;
+import io.github.bonigarcia.wdm.WebDriverManager;
 
-public class RegistrationAndCheckLeaderScoreBoardTest {
-	BrowserSetUp browserSetUp = new BrowserSetUp();
-	WebDriver driver;
-
-	@Test
-	public void registrationAndCheckLeaderScoreBoardTest() throws InterruptedException {
-		driver = browserSetUp.setUp();
-		String username = browserSetUp.generateRandomString();
-		UserRegistration userRegistration = new UserRegistration();
-		driver.get("https://responsivefight.herokuapp.com/");
+public class PracticeTest {
+	
+	
+	    @Test
+		public static void practiceTest() throws NumberFormatException, InterruptedException {
+			
+			WebDriverManager.chromedriver().setup();
+			WebDriver driver = new ChromeDriver();
+		
+		driver.get("https://www.facebook.com");
+		//driver.navigate().to("https://www.facebook.com");
 		driver.manage().window().maximize();
-		userRegistration.registrationID(driver).click();
-		WebDriverWait wait = new WebDriverWait(driver, 5);
-		wait.until(ExpectedConditions.elementToBeClickable(userRegistration.username(driver)));
-		userRegistration.username(driver).sendKeys(username);
-		wait.until(ExpectedConditions.elementToBeClickable(userRegistration.password(driver)));
-		userRegistration.password(driver).sendKeys(username);
-		wait.until(ExpectedConditions.elementToBeClickable(userRegistration.repeatPassword(driver)));
-		userRegistration.repeatPassword(driver).sendKeys(username);
-		wait.until(ExpectedConditions.elementToBeClickable(userRegistration.signUp(driver)));
-		userRegistration.signUp(driver).click();
-		
-		
-		LoginFlow loginFlow = new LoginFlow();
-		wait.until(ExpectedConditions.elementToBeClickable(loginFlow.worriorUsername(driver)));
-		loginFlow.enterText(loginFlow.worriorUsername(driver), driver, username);
-		loginFlow.enterText(loginFlow.worriorPassword(driver), driver, username);
-		loginFlow.clickElement(loginFlow.worriorLoginID(driver), driver);
-
-		GameChallenge gameChallenge = new GameChallenge();
-		gameChallenge.clickElement(gameChallenge.startID(driver), driver);
-		gameChallenge.clickElement(gameChallenge.enterAtYourOwnRisk(driver), driver);
-		gameChallenge.clickElement(gameChallenge.startTheGame(driver), driver);
-		gameChallenge.clickElement(gameChallenge.question1(driver), driver);
-		gameChallenge.clickElement(gameChallenge.continue1(driver), driver);
-		gameChallenge.clickElement(gameChallenge.question2(driver), driver);
-		gameChallenge.clickElement(gameChallenge.continue2(driver), driver);
-		gameChallenge.clickElement(gameChallenge.question3(driver), driver);
-		gameChallenge.clickElement(gameChallenge.continue3(driver), driver);
-		gameChallenge.clickElement(gameChallenge.question4(driver), driver);
-		gameChallenge.clickElement(gameChallenge.continue4(driver), driver);
-		driver.get(gameChallenge.leaderBoardURL(driver));
-		Thread.sleep(2000);
-		Assert.assertTrue(driver.getPageSource().contains(username));
-		browserSetUp.tearDown(driver);
+		JavascriptExecutor j = (JavascriptExecutor)driver;
+	    //j.executeScript ("document.getElementById('email').value='KondababuA'");
+	   	//WebElement username =  driver.findElement(By.id("email"));
+		WebElement username =  driver.findElement(By.name("email"));
+		WebElement password =  driver.findElement(By.id("pass"));
+		//WebElement login =  driver.findElement(By.name("login"));
+		List<WebElement> logins =  driver.findElements(By.name("login"));
+		System.out.println("Logins Size:: "+logins.size());
+		//username.sendKeys("KondababuA");
+		//password.sendKeys("Password");
+				
+		j.executeScript("arguments[0].value='pte2408202001@gmail.com'", username);
+		j.executeScript("arguments[0].value='P@ssw0rd1'", password);
+		//login.click();
+		logins.get(0).click();
+		Thread.sleep(Long.valueOf("20000"));
+		driver.close();
 	}
 }
