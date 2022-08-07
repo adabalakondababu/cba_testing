@@ -14,7 +14,14 @@ public void TestToPass()
 {		
 	System.out.println("This method to test Pass");					
     Assert.assertTrue(true);						
-}		
+}	
+
+@Test		
+public void TestToPass2()				
+{		
+	System.out.println("This method to test Pass");					
+    Assert.assertTrue(true);						
+}
 
 //Forcefully failed this test as verify listener.		
 @Test		
