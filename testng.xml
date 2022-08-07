@@ -1,9 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 <suite name="Suite">
+
+ <listeners>
+   <listener class-name="com.automation.testng.ListenerTest"></listener>
+ </listeners>
+<parameter name="myname" value="Adabala"></parameter>
   <test name="Test">
-  <packages>
-      <package name="com.automation.ui.*"></package>
+<packages>
+      <package name="com.automation.testng"></package>
   </packages>
+<!-- <classes>
+   <class name="com.automation.testng.TestNGTest9"></class>
+</classes> -->
   </test> <!-- Test -->
 </suite> <!-- Suite -->
