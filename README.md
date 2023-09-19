@@ -36,4 +36,3 @@ json - This is used to generate JSON requests for both POST and PUT requests.
 **Automation Test Results**
 
 ![Automation Test Results](AutomationResults.PNG "AutomationResults")
-
